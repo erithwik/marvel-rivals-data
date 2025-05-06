@@ -184,6 +184,38 @@ def get_latest_games(filtered_matches: dict, num_games: int = 10):
 
 # --- Plotting Helper Functions ---
 
+def get_globally_latest_update_time(all_player_data_dict: dict) -> str:
+    """
+    Finds the most recent match timestamp from all player data,
+    converts it to PST, and returns a formatted string.
+    """
+    latest_pst_time_obj = None
+
+    for player_ign in all_player_data_dict:
+        player_matches = all_player_data_dict.get(player_ign, {})
+        # Ensure player_matches is a dictionary (it should be from json.load)
+        if not isinstance(player_matches, dict):
+            # This case should ideally not happen if load_all_player_data works as expected
+            print(f"Warning: Data for player {player_ign} is not in the expected format. Skipping for latest time calculation.")
+            continue
+
+        for match_id, match_data in player_matches.items():
+            # Ensure match_data is a dictionary
+            if not isinstance(match_data, dict):
+                print(f"Warning: Match data for {match_id} (player {player_ign}) is not a dictionary. Skipping for latest time calculation.")
+                continue
+            match_timestamp_str = match_data.get("match_timestamp")
+            if match_timestamp_str:
+                current_pst_time_obj = convert_datetime(match_timestamp_str) # convert_datetime returns PST or None
+                if current_pst_time_obj:
+                    if latest_pst_time_obj is None or current_pst_time_obj > latest_pst_time_obj:
+                        latest_pst_time_obj = current_pst_time_obj
+
+    if latest_pst_time_obj:
+        # Format to YYYY-MM-DD hh:mm:ss AM/PM PST
+        return f"Last data update: {latest_pst_time_obj.strftime('%Y-%m-%d %I:%M:%S %p PST')}"
+    return "Last data update: N/A"
+
 def create_hero_average_chart(avg_pm: dict, player_ign: str):
     """Generates a Plotly bar chart for average hero performance."""
     if not avg_pm:
@@ -317,6 +349,7 @@ st.title("Marvel Rivals Data Explorer")
 
 # Load data
 all_player_data, available_players = load_all_player_data()
+last_update_string = get_globally_latest_update_time(all_player_data)
 
 if not available_players:
     st.error("No player data could be loaded. Please check the `data` directory and file names.")
@@ -330,6 +363,7 @@ selected_player_ign = st.sidebar.selectbox(
     index=0,
     format_func=lambda x: IN_GAME_NAMES.get(x, x) # Show readable names
 )
+st.sidebar.caption(last_update_string) # Display the last update time
 
 only_friend_games = st.sidebar.checkbox("Filter games to only include games containing any friend?", value=False)
 only_friend_teammates_matchups = st.sidebar.checkbox("Filter same-team matchups to only include teammates considered friends?", value=False)
