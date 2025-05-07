@@ -365,8 +365,8 @@ selected_player_ign = st.sidebar.selectbox(
 )
 st.sidebar.caption(last_update_string) # Display the last update time
 
-only_friend_games = st.sidebar.checkbox("Filter games to only include games containing any friend?", value=False)
-only_friend_teammates_matchups = st.sidebar.checkbox("Filter same-team matchups to only include teammates considered friends?", value=False)
+only_friend_games = st.sidebar.checkbox("Filter games to only include games containing friends?", value=False)
+only_friend_teammates_matchups = st.sidebar.checkbox("Update same-team matchups charts to only include heroes played by friends?", value=False)
 
 # --- Main Content ---
 if selected_player_ign and selected_player_ign in all_player_data:
