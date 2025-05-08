@@ -1,4 +1,808 @@
 {
+    "42115045c7807c3fa3905c54344933ee812ebbc1f2546eba69305eae160ec52a": {
+        "match_id": "42115045c7807c3fa3905c54344933ee812ebbc1f2546eba69305eae160ec52a",
+        "match_timestamp": "2025-05-07T07:02:57+00:00",
+        "is_win": false,
+        "is_loss": true,
+        "match_details": [
+            {
+                "name": "My Cap's Black",
+                "heroes": [
+                    "Jeff The Land Shark",
+                    "Invisible Woman"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": true,
+                "rank_delta": 0.0
+            },
+            {
+                "name": "YinYangSniper0",
+                "heroes": [
+                    "Moon Knight"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": true,
+                "rank_delta": -20.0
+            },
+            {
+                "name": "BigMcConkey",
+                "heroes": [
+                    "Peni Parker",
+                    "The Thing"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": true,
+                "rank_delta": -20.0
+            },
+            {
+                "name": "LiquidusSnake1",
+                "heroes": [
+                    "Captain America",
+                    "Magneto"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": true,
+                "rank_delta": -21.0
+            },
+            {
+                "name": "Jadezy",
+                "heroes": [
+                    "Invisible Woman",
+                    "Mister Fantastic"
+                ],
+                "is_mvp": false,
+                "is_svp": true,
+                "is_same_team": true,
+                "rank_delta": -21.0
+            },
+            {
+                "name": "Tenisstar2000",
+                "heroes": [
+                    "Scarlet Witch",
+                    "Rocket Raccoon"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": true,
+                "rank_delta": -22.0
+            },
+            {
+                "name": "Icyzaee",
+                "heroes": [
+                    "Jeff The Land Shark"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": false,
+                "rank_delta": 32.0
+            },
+            {
+                "name": "Vengeance2nite",
+                "heroes": [
+                    "Thor"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": false,
+                "rank_delta": 32.0
+            },
+            {
+                "name": "Capucharoja",
+                "heroes": [
+                    "Squirrel Girl"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": false,
+                "rank_delta": 31.0
+            },
+            {
+                "name": "Greenpack007",
+                "heroes": [
+                    "Namor"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": false,
+                "rank_delta": 31.0
+            },
+            {
+                "name": "Ineedmoney666",
+                "heroes": [
+                    "Loki"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": false,
+                "rank_delta": 25.0
+            },
+            {
+                "name": "Alexmj",
+                "heroes": [
+                    "Emma Frost"
+                ],
+                "is_mvp": true,
+                "is_svp": false,
+                "is_same_team": false,
+                "rank_delta": 25.0
+            }
+        ]
+    },
+    "9a5756107003ffea8a27bb2976c2e257a23021797632b4b55c0444ff0c6332f8": {
+        "match_id": "9a5756107003ffea8a27bb2976c2e257a23021797632b4b55c0444ff0c6332f8",
+        "match_timestamp": "2025-05-07T06:32:26+00:00",
+        "is_win": false,
+        "is_loss": true,
+        "match_details": [
+            {
+                "name": "LiquidusSnake1",
+                "heroes": [
+                    "Iron Man",
+                    "Captain America"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": true,
+                "rank_delta": -19.0
+            },
+            {
+                "name": "massive bao",
+                "heroes": [
+                    "The Thing",
+                    "Psylocke"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": true,
+                "rank_delta": -20.0
+            },
+            {
+                "name": "r0mantic",
+                "heroes": [
+                    "Cloak & Dagger"
+                ],
+                "is_mvp": false,
+                "is_svp": true,
+                "is_same_team": true,
+                "rank_delta": -20.0
+            },
+            {
+                "name": "Dickitty dog",
+                "heroes": [
+                    "Loki",
+                    "Squirrel Girl",
+                    "Mister Fantastic"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": true,
+                "rank_delta": -20.0
+            },
+            {
+                "name": "Tenisstar2000",
+                "heroes": [
+                    "Rocket Raccoon",
+                    "Moon Knight",
+                    "Peni Parker"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": true,
+                "rank_delta": -20.0
+            },
+            {
+                "name": "glacial_spark",
+                "heroes": [
+                    "Mister Fantastic",
+                    "Doctor Strange"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": true,
+                "rank_delta": -21.0
+            },
+            {
+                "name": "Cbass79",
+                "heroes": [
+                    "Human Torch"
+                ],
+                "is_mvp": true,
+                "is_svp": false,
+                "is_same_team": false,
+                "rank_delta": 43.0
+            },
+            {
+                "name": "Demdada",
+                "heroes": [
+                    "Rocket Raccoon"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": false,
+                "rank_delta": 31.0
+            },
+            {
+                "name": "WHOVU",
+                "heroes": [
+                    "Moon Knight",
+                    "Winter Soldier"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": false,
+                "rank_delta": 29.0
+            },
+            {
+                "name": "UhhCash",
+                "heroes": [
+                    "Mantis"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": false,
+                "rank_delta": 26.0
+            },
+            {
+                "name": "Yungmustard",
+                "heroes": [
+                    "Peni Parker"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": false,
+                "rank_delta": 23.0
+            },
+            {
+                "name": "Headtapperrrrr",
+                "heroes": [
+                    "Hela",
+                    "Mister Fantastic"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": false,
+                "rank_delta": 23.0
+            }
+        ]
+    },
+    "5b4e03c0b49557ac0d9d61b57206034d52fa5dea49c6fbddd6aada02495d7b7f": {
+        "match_id": "5b4e03c0b49557ac0d9d61b57206034d52fa5dea49c6fbddd6aada02495d7b7f",
+        "match_timestamp": "2025-05-07T06:17:48+00:00",
+        "is_win": false,
+        "is_loss": true,
+        "match_details": [
+            {
+                "name": "3 I 3",
+                "heroes": [
+                    "Cloak & Dagger"
+                ],
+                "is_mvp": false,
+                "is_svp": true,
+                "is_same_team": true,
+                "rank_delta": 0.0
+            },
+            {
+                "name": "massive bao",
+                "heroes": [
+                    "The Thing"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": true,
+                "rank_delta": -18.0
+            },
+            {
+                "name": "LiquidusSnake1",
+                "heroes": [
+                    "Rocket Raccoon",
+                    "Magneto"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": true,
+                "rank_delta": -20.0
+            },
+            {
+                "name": "glacial_spark",
+                "heroes": [
+                    "Mister Fantastic"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": true,
+                "rank_delta": -22.0
+            },
+            {
+                "name": "Tenisstar2000",
+                "heroes": [
+                    "Peni Parker",
+                    "Rocket Raccoon"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": true,
+                "rank_delta": -23.0
+            },
+            {
+                "name": "Seizuremonk",
+                "heroes": [
+                    "Wolverine",
+                    "Moon Knight",
+                    "Namor",
+                    "Magik"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": true,
+                "rank_delta": -27.0
+            },
+            {
+                "name": "Peachyniba",
+                "heroes": [
+                    "Magik"
+                ],
+                "is_mvp": true,
+                "is_svp": false,
+                "is_same_team": false,
+                "rank_delta": 30.0
+            },
+            {
+                "name": "BongWater69420",
+                "heroes": [
+                    "Doctor Strange"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": false,
+                "rank_delta": 29.0
+            },
+            {
+                "name": "Fuyu_light",
+                "heroes": [
+                    "The Punisher"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": false,
+                "rank_delta": 28.0
+            },
+            {
+                "name": "Dredlocs",
+                "heroes": [
+                    "Rocket Raccoon"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": false,
+                "rank_delta": 27.0
+            },
+            {
+                "name": "Toxic Hysteria",
+                "heroes": [
+                    "Scarlet Witch"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": false,
+                "rank_delta": 25.0
+            },
+            {
+                "name": "FierroColgando",
+                "heroes": [
+                    "Cloak & Dagger"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": false,
+                "rank_delta": 24.0
+            }
+        ]
+    },
+    "0ba5e3cc270886d53d4550309647c3a062bfa42a2b55f8fa4471cbe8742f203e": {
+        "match_id": "0ba5e3cc270886d53d4550309647c3a062bfa42a2b55f8fa4471cbe8742f203e",
+        "match_timestamp": "2025-05-07T06:06:44+00:00",
+        "is_win": true,
+        "is_loss": false,
+        "match_details": [
+            {
+                "name": "LiquidusSnake1",
+                "heroes": [
+                    "Rocket Raccoon"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": true,
+                "rank_delta": 36.0
+            },
+            {
+                "name": "massive bao",
+                "heroes": [
+                    "The Thing"
+                ],
+                "is_mvp": true,
+                "is_svp": false,
+                "is_same_team": true,
+                "rank_delta": 29.0
+            },
+            {
+                "name": "Tenisstar2000",
+                "heroes": [
+                    "Cloak & Dagger"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": true,
+                "rank_delta": 27.0
+            },
+            {
+                "name": "LJose2122",
+                "heroes": [
+                    "Magik"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": true,
+                "rank_delta": 26.0
+            },
+            {
+                "name": "glacial_spark",
+                "heroes": [
+                    "Doctor Strange"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": true,
+                "rank_delta": 24.0
+            },
+            {
+                "name": "cropTeezy",
+                "heroes": [
+                    "Psylocke"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": true,
+                "rank_delta": 22.0
+            },
+            {
+                "name": "itsjoey174",
+                "heroes": [
+                    "Mister Fantastic",
+                    "Rocket Raccoon",
+                    "Winter Soldier"
+                ],
+                "is_mvp": false,
+                "is_svp": true,
+                "is_same_team": false,
+                "rank_delta": -13.0
+            },
+            {
+                "name": "BiggaChoppa",
+                "heroes": [
+                    "Hawkeye",
+                    "Emma Frost"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": false,
+                "rank_delta": -19.0
+            },
+            {
+                "name": "Kinlee55",
+                "heroes": [
+                    "Thor",
+                    "Loki"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": false,
+                "rank_delta": -20.0
+            },
+            {
+                "name": "DADDYO",
+                "heroes": [
+                    "Cloak & Dagger"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": false,
+                "rank_delta": -21.0
+            },
+            {
+                "name": "TheSaucyRagu",
+                "heroes": [
+                    "Magneto",
+                    "Namor"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": false,
+                "rank_delta": -22.0
+            },
+            {
+                "name": "HisSquirrelUwU",
+                "heroes": [
+                    "Invisible Woman",
+                    "Luna Snow"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": false,
+                "rank_delta": -26.0
+            }
+        ]
+    },
+    "ea16e66d0341d4abb977963bcf2925d706a6de46c429f9d799703ed410aa0808": {
+        "match_id": "ea16e66d0341d4abb977963bcf2925d706a6de46c429f9d799703ed410aa0808",
+        "match_timestamp": "2025-05-07T05:46:16+00:00",
+        "is_win": true,
+        "is_loss": false,
+        "match_details": [
+            {
+                "name": "Aleks syntek",
+                "heroes": [
+                    "Iron Man"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": true,
+                "rank_delta": 34.0
+            },
+            {
+                "name": "LiquidusSnake1",
+                "heroes": [
+                    "Rocket Raccoon"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": true,
+                "rank_delta": 33.0
+            },
+            {
+                "name": "massive bao",
+                "heroes": [
+                    "The Thing"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": true,
+                "rank_delta": 30.0
+            },
+            {
+                "name": "Tenisstar2000",
+                "heroes": [
+                    "Cloak & Dagger"
+                ],
+                "is_mvp": true,
+                "is_svp": false,
+                "is_same_team": true,
+                "rank_delta": 28.0
+            },
+            {
+                "name": "code432",
+                "heroes": [
+                    "Spider-Man"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": true,
+                "rank_delta": 26.0
+            },
+            {
+                "name": "glacial_spark",
+                "heroes": [
+                    "Doctor Strange",
+                    "Emma Frost"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": true,
+                "rank_delta": 24.0
+            },
+            {
+                "name": "Finsta421",
+                "heroes": [
+                    "Emma Frost",
+                    "Scarlet Witch"
+                ],
+                "is_mvp": false,
+                "is_svp": true,
+                "is_same_team": false,
+                "rank_delta": -11.0
+            },
+            {
+                "name": "Fnvfan",
+                "heroes": [
+                    "The Punisher"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": false,
+                "rank_delta": -20.0
+            },
+            {
+                "name": "ColdChopper3",
+                "heroes": [
+                    "Peni Parker"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": false,
+                "rank_delta": -22.0
+            },
+            {
+                "name": "Sir Mar",
+                "heroes": [
+                    "Luna Snow",
+                    "Doctor Strange"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": false,
+                "rank_delta": -24.0
+            },
+            {
+                "name": "Cripnard",
+                "heroes": [
+                    "Star-Lord",
+                    "Iron Fist",
+                    "Scarlet Witch"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": false,
+                "rank_delta": -24.0
+            },
+            {
+                "name": "TurboTickler",
+                "heroes": [
+                    "Rocket Raccoon"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": false,
+                "rank_delta": -25.0
+            }
+        ]
+    },
+    "7b40dbe886f9728c74470a151cdc669f609b78913c5e3831d708bee9a4c3bb4b": {
+        "match_id": "7b40dbe886f9728c74470a151cdc669f609b78913c5e3831d708bee9a4c3bb4b",
+        "match_timestamp": "2025-05-07T05:30:31+00:00",
+        "is_win": true,
+        "is_loss": false,
+        "match_details": [
+            {
+                "name": "massive bao",
+                "heroes": [
+                    "Iron Fist"
+                ],
+                "is_mvp": true,
+                "is_svp": false,
+                "is_same_team": true,
+                "rank_delta": 38.0
+            },
+            {
+                "name": "CrystalBreeze7",
+                "heroes": [
+                    "Peni Parker"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": true,
+                "rank_delta": 32.0
+            },
+            {
+                "name": "LiquidusSnake1",
+                "heroes": [
+                    "Captain America"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": true,
+                "rank_delta": 31.0
+            },
+            {
+                "name": "Ntgopan",
+                "heroes": [
+                    "Rocket Raccoon"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": true,
+                "rank_delta": 31.0
+            },
+            {
+                "name": "Tenisstar2000",
+                "heroes": [
+                    "Cloak & Dagger"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": true,
+                "rank_delta": 29.0
+            },
+            {
+                "name": "slimebeans",
+                "heroes": [
+                    "The Punisher",
+                    "Squirrel Girl"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": true,
+                "rank_delta": 27.0
+            },
+            {
+                "name": "CurvyKermit",
+                "heroes": [
+                    "Invisible Woman"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": false,
+                "rank_delta": 0.0
+            },
+            {
+                "name": "Flashleek",
+                "heroes": [
+                    "Magneto",
+                    "Venom"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": false,
+                "rank_delta": 0.0
+            },
+            {
+                "name": "DemonicPr0d1gy",
+                "heroes": [
+                    "Jeff The Land Shark",
+                    "Moon Knight"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": false,
+                "rank_delta": -15.0
+            },
+            {
+                "name": "Big dawggggggg",
+                "heroes": [
+                    "Cloak & Dagger"
+                ],
+                "is_mvp": false,
+                "is_svp": true,
+                "is_same_team": false,
+                "rank_delta": -17.0
+            },
+            {
+                "name": "Yonko_Kaido24",
+                "heroes": [
+                    "Venom",
+                    "Captain America",
+                    "The Thing"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": false,
+                "rank_delta": -23.0
+            },
+            {
+                "name": "Code.org",
+                "heroes": [
+                    "Spider-Man",
+                    "Iron Fist"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": false,
+                "rank_delta": -25.0
+            }
+        ]
+    },
     "0379d61fbe4ecfd4754b998790290ec5558e8e370ad171b02c969a619aacbacf": {
         "match_id": "0379d61fbe4ecfd4754b998790290ec5558e8e370ad171b02c969a619aacbacf",
         "match_timestamp": "2025-05-06T20:44:18+00:00",
