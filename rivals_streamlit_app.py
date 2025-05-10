@@ -258,8 +258,6 @@ def create_map_performance_chart(map_data: dict, map_games: dict, player_ign: st
                 y=y_values,
                 name='Map Performance',
                 marker_color=colors,
-                text=df_map['Games'] if show_average else None,
-                textposition='auto' if show_average else None
             )
         )
     
@@ -307,8 +305,6 @@ def create_map_type_performance_chart(map_data: dict, map_games: dict, player_ig
                 y=y_values,
                 name='Map Performance',
                 marker_color=colors,
-                text=df_map['Games'] if show_average else None,
-                textposition='auto' if show_average else None
             )
         )
     
