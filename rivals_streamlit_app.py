@@ -43,6 +43,18 @@ MAP_NAME_TO_MAP_TYPE = {
     "Hall Of Djalia": "Convergence"
 }
 
+AVERAGE_HERO_PERFORMANCE_TEXT = "This next chart shows the average (per game) elo plus/minus for each hero you've played in competitive play."
+AVERAGE_MATCHUP_SAME_TEAM_PERFORMANCE_TEXT = "This next chart shows the average (per game) elo plus/minus based on what heroes played with you. For example, when you play {player_hero}, if your team has a {teammate_hero}, you perform relatively well."
+AVERAGE_MATCHUP_OPPONENT_PERFORMANCE_TEXT = "This next chart shows the average (per game) elo plus/minus based on what heroes played against you. For example, when you play {player_hero}, if the opposing team has a {opponent_hero}, you perform relatively poorly."
+AVERAGE_MAP_PERFORMANCE_TEXT = "This next chart shows the average (per game) elo plus/minus for each map you've played in competitive play. For example, if you play {player_hero} on {map_name}, you perform relatively well."
+AVERAGE_MAP_TYPE_PERFORMANCE_TEXT = "This next chart shows the average (per game) elo plus/minus for each map type you've played in competitive play. For example, if you play {player_hero} on {map_type}, you perform relatively well."
+
+TOTAL_HERO_PERFORMANCE_TEXT = "This next chart shows the total elo plus/minus of each hero you've played in competitive play."
+TOTAL_MATCHUP_SAME_TEAM_PERFORMANCE_TEXT = "This next chart shows the total elo plus/minus based on what heroes played with you. For example, when you play {player_hero}, if your team has a {teammate_hero}, you perform relatively well."
+TOTAL_MATCHUP_OPPONENT_PERFORMANCE_TEXT = "This next chart shows the total elo plus/minus based on what heroes played against you. For example, when you play {player_hero}, if the opposing team has a {opponent_hero}, you perform relatively poorly."
+TOTAL_MAP_PERFORMANCE_TEXT = "This next chart shows the total elo plus/minus for each map you've played in competitive play. For example, if you play {player_hero} on {map_name}, you perform relatively well."
+TOTAL_MAP_TYPE_PERFORMANCE_TEXT = "This next chart shows the total elo plus/minus for each map type you've played in competitive play. For example, if you play {player_hero} on {map_type}, you perform relatively well."
+
 @st.cache_data # Cache data loading
 def load_all_player_data():
     all_data = {}
@@ -528,6 +540,7 @@ if selected_player_ign and selected_player_ign in all_player_data:
 
         with avg_tab:
             st.subheader("Average Hero Performance (+/- per Game)")
+            st.text(AVERAGE_HERO_PERFORMANCE_TEXT)
             fig_hero_avg = create_hero_average_chart(avg_pm, player_readable_name)
             if fig_hero_avg:
                 st.plotly_chart(fig_hero_avg, use_container_width=True)
@@ -561,12 +574,18 @@ if selected_player_ign and selected_player_ign in all_player_data:
 
                      fig_team = create_matchup_chart(team_matchups, player_readable_name, char_to_analyze, is_teammate_chart=True)
                      if fig_team:
+                         player_hero = char_to_analyze
+                         teammate_hero = list(team_matchups.keys())[0]
+                         st.text(AVERAGE_MATCHUP_SAME_TEAM_PERFORMANCE_TEXT.format(player_hero=player_hero, teammate_hero=teammate_hero))
                          st.plotly_chart(fig_team, use_container_width=True)
                      else:
                          st.info(f"No teammate matchup data available for {char_to_analyze} with the selected filters.")
 
                      fig_opp = create_matchup_chart(opp_matchups, player_readable_name, char_to_analyze, is_teammate_chart=False)
                      if fig_opp:
+                         player_hero = char_to_analyze
+                         opponent_hero = list(opp_matchups.keys())[-1]
+                         st.text(AVERAGE_MATCHUP_OPPONENT_PERFORMANCE_TEXT.format(player_hero=player_hero, opponent_hero=opponent_hero))
                          st.plotly_chart(fig_opp, use_container_width=True)
                      else:
                          st.info(f"No opponent matchup data available for {char_to_analyze} with the selected filters.")
@@ -585,6 +604,10 @@ if selected_player_ign and selected_player_ign in all_player_data:
                          show_average=True
                      )
                      if fig_map_avg:
+                         player_hero = char_to_analyze
+                         # Get the best performing map by sorting based on average performance
+                         best_map_name = max(map_data.items(), key=lambda x: x[1]/map_games[x[0]] if map_games[x[0]] > 0 else float('-inf'))[0]
+                         st.text(AVERAGE_MAP_PERFORMANCE_TEXT.format(player_hero=player_hero, map_name=best_map_name))
                          st.plotly_chart(fig_map_avg, use_container_width=True)
                      else:
                          st.info(f"No map performance data available for {char_to_analyze} with the selected filters.")
@@ -603,6 +626,10 @@ if selected_player_ign and selected_player_ign in all_player_data:
                          show_average=True
                      )
                      if fig_map_type_avg:
+                         player_hero = char_to_analyze
+                         # Get the best performing map type by sorting based on average performance
+                         best_map_type = max(map_type_data.items(), key=lambda x: x[1]/map_type_games[x[0]] if map_type_games[x[0]] > 0 else float('-inf'))[0]
+                         st.text(AVERAGE_MAP_TYPE_PERFORMANCE_TEXT.format(player_hero=player_hero, map_type=best_map_type))
                          st.plotly_chart(fig_map_type_avg, use_container_width=True)
                      else:
                          st.info(f"No map performance data available for {char_to_analyze} with the selected filters.")
@@ -611,6 +638,7 @@ if selected_player_ign and selected_player_ign in all_player_data:
 
         with total_tab:
             st.subheader("Total Hero Performance (Cumulative +/-)")
+            st.text(TOTAL_HERO_PERFORMANCE_TEXT)
             fig_hero_total = create_hero_total_chart(overall_pm, player_readable_name)
             if fig_hero_total:
                 st.plotly_chart(fig_hero_total, use_container_width=True)
@@ -648,6 +676,9 @@ if selected_player_ign and selected_player_ign in all_player_data:
                      # Display Total Teammate Matchup Chart
                      fig_total_team = create_total_matchup_chart(total_team_matchups, player_readable_name, char_to_analyze, is_teammate_chart=True)
                      if fig_total_team:
+                         player_hero = char_to_analyze
+                         teammate_hero = list(total_team_matchups.keys())[0]
+                         st.text(TOTAL_MATCHUP_SAME_TEAM_PERFORMANCE_TEXT.format(player_hero=player_hero, teammate_hero=teammate_hero))
                          st.plotly_chart(fig_total_team, use_container_width=True)
                      else:
                          st.info(f"No total teammate matchup data available for {char_to_analyze} with the selected filters.")
@@ -655,6 +686,9 @@ if selected_player_ign and selected_player_ign in all_player_data:
                      # Display Total Opponent Matchup Chart
                      fig_total_opp = create_total_matchup_chart(total_opp_matchups, player_readable_name, char_to_analyze, is_teammate_chart=False)
                      if fig_total_opp:
+                         player_hero = char_to_analyze
+                         opponent_hero = list(total_opp_matchups.keys())[-1]
+                         st.text(TOTAL_MATCHUP_OPPONENT_PERFORMANCE_TEXT.format(player_hero=player_hero, opponent_hero=opponent_hero))
                          st.plotly_chart(fig_total_opp, use_container_width=True)
                      else:
                          st.info(f"No total opponent matchup data available for {char_to_analyze} with the selected filters.")
@@ -673,6 +707,10 @@ if selected_player_ign and selected_player_ign in all_player_data:
                          show_average=False
                      )
                      if fig_map_total:
+                         player_hero = char_to_analyze
+                         # Get the best performing map by total performance
+                         best_map_name = max(map_data.items(), key=lambda x: x[1])[0]
+                         st.text(TOTAL_MAP_PERFORMANCE_TEXT.format(player_hero=player_hero, map_name=best_map_name))
                          st.plotly_chart(fig_map_total, use_container_width=True)
                      else:
                          st.info(f"No map performance data available for {char_to_analyze} with the selected filters.")
@@ -691,6 +729,10 @@ if selected_player_ign and selected_player_ign in all_player_data:
                          show_average=False
                      )
                      if fig_map_type_total:
+                         player_hero = char_to_analyze
+                         # Get the best performing map type by total performance
+                         best_map_type = max(map_type_data.items(), key=lambda x: x[1])[0]
+                         st.text(TOTAL_MAP_TYPE_PERFORMANCE_TEXT.format(player_hero=player_hero, map_type=best_map_type))
                          st.plotly_chart(fig_map_type_total, use_container_width=True)
                      else:
                          st.info(f"No map performance data available for {char_to_analyze} with the selected filters.")
