@@ -25,10 +25,22 @@ FRIENDS = set(IN_GAME_NAMES.values())
 # Relevant characters (adjust as needed)
 RELEVANT_CHARACTERS_MAP = {
     "glacial_spark": ["Emma Frost", "Doctor Strange", "Mister Fantastic"],
-    "massive bao": ["Invisible Woman", "Iron Fist", "The Thing", "Psylocke", "Rocket Raccoon"],
-    "Tenisstar2000": ["Cloak & Dagger", "Scarlet Witch", "Groot"],
-    "LiquidusSnake1": ["Loki", "Magneto", "Iron Man", "Thor", "Rocket Raccoon"],
+    "massive bao": ["Invisible Woman", "Iron Fist", "The Thing", "Rocket Raccoon"],
+    "Tenisstar2000": ["Cloak & Dagger", "Scarlet Witch", "Peni Parker"],
+    "LiquidusSnake1": ["Loki", "Magneto", "Iron Man", "Captain America", "Rocket Raccoon"],
     "necros_cnf": ["Iron Fist", "Cloak & Dagger"]
+}
+
+MAP_NAME_TO_MAP_TYPE = {
+    "Spider-Islands": "Convoy",
+    "Krakoa": "Domination",
+    "Yggdrasill Path": "Convoy",
+    "Birnin T'Challa": "Domination",
+    "Central Park": "Convergence",
+    "Symbiotic Surface": "Convergence",
+    "Hell's Heaven": "Domination",
+    "Midtown": "Convoy",
+    "Hall Of Djalia": "Convergence"
 }
 
 @st.cache_data # Cache data loading
@@ -165,6 +177,37 @@ def get_total_matchups(filtered_matches: dict, player_ign: str, character: str, 
 
     return dict(sorted(matchups.items(), key=lambda item: item[1], reverse=True))
 
+def get_map_performance_for_hero(filtered_matches: dict, player_ign: str, character: str):
+    """Calculates total map performance for a specific hero."""
+    map_data = defaultdict(int)
+    map_games = defaultdict(int)
+    for _, match_data in filtered_matches.items():
+        map_name = match_data.get("map", "Unknown")
+        player_list = [player for player in match_data.get("match_details", []) if player.get("name") == player_ign]
+        if not player_list:
+            continue
+        player_data = player_list[0]
+        if character in player_data.get("heroes", []):
+            map_data[map_name] += player_data.get("rank_delta", 0)
+            map_games[map_name] += 1
+    return map_data, map_games
+
+
+def get_map_type_performance_for_hero(filtered_matches: dict, player_ign: str, character: str):
+    """Calculates total map performance for a specific hero."""
+    map_data = defaultdict(int)
+    map_games = defaultdict(int)
+    for _, match_data in filtered_matches.items():
+        map_type = MAP_NAME_TO_MAP_TYPE[match_data["map"]]
+        player_list = [player for player in match_data.get("match_details", []) if player.get("name") == player_ign]
+        if not player_list:
+            continue
+        player_data = player_list[0]
+        if character in player_data.get("heroes", []):
+            map_data[map_type] += player_data.get("rank_delta", 0)
+            map_games[map_type] += 1
+    return map_data, map_games
+
 def get_latest_games(filtered_matches: dict, num_games: int = 10):
     matches_list = list(filtered_matches.values())
     # Sort by timestamp, handling potential None values from parsing errors
@@ -182,6 +225,102 @@ def get_latest_games(filtered_matches: dict, num_games: int = 10):
         latest_games_data.append(game_info)
     return latest_games_data
 
+def create_map_performance_chart(map_data: dict, map_games: dict, player_ign: str, character: str, show_average: bool = False):
+    """Generates a Plotly bar chart for map performance for a specific hero."""
+    if not map_data:
+        return None
+    
+    df_columns = ['Map', 'Rank Delta']
+    df_map = pd.DataFrame(list(map_data.items()), columns=df_columns)
+    
+    if show_average:
+        # Calculate average per map
+        df_map['Games'] = [map_games.get(map_name, 1) for map_name in df_map['Map']]
+        df_map['Average Delta'] = df_map['Rank Delta'] / df_map['Games']
+        df_map = df_map.sort_values(by='Average Delta', ascending=False)
+        y_values = df_map['Average Delta']
+        title_text = f"Average Map Performance for {character} (Avg +/- per Game)"
+        y_axis_title = "Average Rank Delta per Game"
+    else:
+        # Use total values
+        df_map = df_map.sort_values(by='Rank Delta', ascending=False)
+        y_values = df_map['Rank Delta']
+        title_text = f"Total Map Performance for {character} (Cumulative +/-)"
+        y_axis_title = "Total Cumulative Rank Delta"
+    
+    colors = ['blue' if delta >= 0 else 'red' for delta in y_values]
+    
+    fig = go.Figure()
+    if not df_map.empty:
+        fig.add_trace(
+            go.Bar(
+                x=df_map['Map'],
+                y=y_values,
+                name='Map Performance',
+                marker_color=colors,
+                text=df_map['Games'] if show_average else None,
+                textposition='auto' if show_average else None
+            )
+        )
+    
+    fig.update_layout(
+        title_text=title_text,
+        showlegend=False,
+        height=400
+    )
+    fig.update_xaxes(title_text="Map", tickangle=45, tickfont=dict(size=10))
+    fig.update_yaxes(title_text=y_axis_title)
+    
+    return fig
+
+
+def create_map_type_performance_chart(map_data: dict, map_games: dict, player_ign: str, character: str, show_average: bool = False):
+    """Generates a Plotly bar chart for map performance for a specific hero."""
+    if not map_data:
+        return None
+    
+    df_columns = ['Map Type', 'Rank Delta']
+    df_map = pd.DataFrame(list(map_data.items()), columns=df_columns)
+    
+    if show_average:
+        # Calculate average per map
+        df_map['Games'] = [map_games.get(map_type, 1) for map_type in df_map['Map Type']]
+        df_map['Average Delta'] = df_map['Rank Delta'] / df_map['Games']
+        df_map = df_map.sort_values(by='Average Delta', ascending=False)
+        y_values = df_map['Average Delta']
+        title_text = f"Average Map Type Performance for {character} (Avg +/- per Game)"
+        y_axis_title = "Average Rank Delta per Game"
+    else:
+        # Use total values
+        df_map = df_map.sort_values(by='Rank Delta', ascending=False)
+        y_values = df_map['Rank Delta']
+        title_text = f"Total Map Type Performance for {character} (Cumulative +/-)"
+        y_axis_title = "Total Cumulative Rank Delta"
+    
+    colors = ['blue' if delta >= 0 else 'red' for delta in y_values]
+    
+    fig = go.Figure()
+    if not df_map.empty:
+        fig.add_trace(
+            go.Bar(
+                x=df_map['Map Type'],
+                y=y_values,
+                name='Map Performance',
+                marker_color=colors,
+                text=df_map['Games'] if show_average else None,
+                textposition='auto' if show_average else None
+            )
+        )
+    
+    fig.update_layout(
+        title_text=title_text,
+        showlegend=False,
+        height=400
+    )
+    fig.update_xaxes(title_text="Map Type", tickangle=45, tickfont=dict(size=10))
+    fig.update_yaxes(title_text=y_axis_title)
+    
+    return fig
 # --- Plotting Helper Functions ---
 
 def get_globally_latest_update_time(all_player_data_dict: dict) -> str:
@@ -435,6 +574,42 @@ if selected_player_ign and selected_player_ign in all_player_data:
                          st.plotly_chart(fig_opp, use_container_width=True)
                      else:
                          st.info(f"No opponent matchup data available for {char_to_analyze} with the selected filters.")
+                     
+                     # Add Average Map Performance
+                     map_data, map_games = get_map_performance_for_hero(
+                         filtered_matches=filtered_player_matches,
+                         player_ign=selected_player_ign,
+                         character=char_to_analyze
+                     )
+                     fig_map_avg = create_map_performance_chart(
+                         map_data=map_data,
+                         map_games=map_games,
+                         player_ign=player_readable_name,
+                         character=char_to_analyze,
+                         show_average=True
+                     )
+                     if fig_map_avg:
+                         st.plotly_chart(fig_map_avg, use_container_width=True)
+                     else:
+                         st.info(f"No map performance data available for {char_to_analyze} with the selected filters.")
+                        
+                     # Add Average Map Type Performance
+                     map_type_data, map_type_games = get_map_type_performance_for_hero(
+                         filtered_matches=filtered_player_matches,
+                         player_ign=selected_player_ign,
+                         character=char_to_analyze
+                     )
+                     fig_map_type_avg = create_map_type_performance_chart(
+                         map_data=map_type_data,
+                         map_games=map_type_games,
+                         player_ign=player_readable_name,
+                         character=char_to_analyze,
+                         show_average=True
+                     )
+                     if fig_map_type_avg:
+                         st.plotly_chart(fig_map_type_avg, use_container_width=True)
+                     else:
+                         st.info(f"No map performance data available for {char_to_analyze} with the selected filters.")
 
                      st.markdown("---")
 
@@ -487,6 +662,42 @@ if selected_player_ign and selected_player_ign in all_player_data:
                          st.plotly_chart(fig_total_opp, use_container_width=True)
                      else:
                          st.info(f"No total opponent matchup data available for {char_to_analyze} with the selected filters.")
+                     
+                     # Add Total Map Performance
+                     map_data, map_games = get_map_performance_for_hero(
+                         filtered_matches=filtered_player_matches,
+                         player_ign=selected_player_ign,
+                         character=char_to_analyze
+                     )
+                     fig_map_total = create_map_performance_chart(
+                         map_data=map_data,
+                         map_games=map_games,
+                         player_ign=player_readable_name,
+                         character=char_to_analyze,
+                         show_average=False
+                     )
+                     if fig_map_total:
+                         st.plotly_chart(fig_map_total, use_container_width=True)
+                     else:
+                         st.info(f"No map performance data available for {char_to_analyze} with the selected filters.")
+                     
+                     # Add Total Map Type Performance
+                     map_type_data, map_type_games = get_map_type_performance_for_hero(
+                         filtered_matches=filtered_player_matches,
+                         player_ign=selected_player_ign,
+                         character=char_to_analyze
+                     )
+                     fig_map_type_total = create_map_type_performance_chart(
+                         map_data=map_type_data,
+                         map_games=map_type_games,
+                         player_ign=player_readable_name,
+                         character=char_to_analyze,
+                         show_average=False
+                     )
+                     if fig_map_type_total:
+                         st.plotly_chart(fig_map_type_total, use_container_width=True)
+                     else:
+                         st.info(f"No map performance data available for {char_to_analyze} with the selected filters.")
 
                      st.markdown("---")
             # ----> END ADDED TOTAL MATCHUP SECTION <----
