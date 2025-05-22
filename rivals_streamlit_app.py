@@ -26,7 +26,7 @@ FRIENDS = set(IN_GAME_NAMES.values())
 RELEVANT_CHARACTERS_MAP = {
     "glacial_spark": ["Emma Frost", "Doctor Strange", "Mister Fantastic"],
     "massive bao": ["Invisible Woman", "Iron Fist", "The Thing", "Rocket Raccoon"],
-    "Tenisstar2000": ["Cloak & Dagger", "Scarlet Witch", "Peni Parker"],
+    "Tenisstar2000": ["Cloak & Dagger", "Scarlet Witch", "Peni Parker", "Rocket Raccoon", "Bruce Banner"],
     "LiquidusSnake1": ["Loki", "Magneto", "Iron Man", "Captain America", "Rocket Raccoon"],
     "necros_cnf": ["Iron Fist", "Cloak & Dagger"]
 }

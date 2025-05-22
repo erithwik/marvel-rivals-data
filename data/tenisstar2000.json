@@ -1,4 +1,142 @@
 {
+    "7a63d37dc6d3d1b69d55779d187854c841427cbfa04774a567c0927c676825bd": {
+        "match_id": "7a63d37dc6d3d1b69d55779d187854c841427cbfa04774a567c0927c676825bd",
+        "match_timestamp": "2025-05-22T04:38:20+00:00",
+        "is_win": false,
+        "is_loss": true,
+        "map": "Hell's Heaven",
+        "match_details": [
+            {
+                "name": "FeinCheck",
+                "heroes": [
+                    "Captain America"
+                ],
+                "is_mvp": false,
+                "is_svp": true,
+                "is_same_team": true,
+                "rank_delta": -15.0
+            },
+            {
+                "name": "Tenisstar2000",
+                "heroes": [
+                    "Cloak & Dagger"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": true,
+                "rank_delta": -17.0
+            },
+            {
+                "name": "RoamingMrRhino",
+                "heroes": [
+                    "Venom",
+                    "The Thing",
+                    "Emma Frost"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": true,
+                "rank_delta": -20.0
+            },
+            {
+                "name": "Paperboy Fabe",
+                "heroes": [
+                    "Moon Knight",
+                    "Namor"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": true,
+                "rank_delta": -22.0
+            },
+            {
+                "name": "SneakyBear",
+                "heroes": [
+                    "Rocket Raccoon"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": true,
+                "rank_delta": -23.0
+            },
+            {
+                "name": "Horribly",
+                "heroes": [
+                    "The Punisher",
+                    "Magik",
+                    "Squirrel Girl",
+                    "Spider-Man",
+                    "Star-Lord"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": true,
+                "rank_delta": -23.0
+            },
+            {
+                "name": "\u00daltimamente 66",
+                "heroes": [
+                    "Hela"
+                ],
+                "is_mvp": true,
+                "is_svp": false,
+                "is_same_team": false,
+                "rank_delta": 26.0
+            },
+            {
+                "name": "EclipseT",
+                "heroes": [
+                    "Loki"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": false,
+                "rank_delta": 25.0
+            },
+            {
+                "name": "JuhCobo",
+                "heroes": [
+                    "Captain America"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": false,
+                "rank_delta": 25.0
+            },
+            {
+                "name": "Gooniepop",
+                "heroes": [
+                    "Thor",
+                    "Emma Frost"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": false,
+                "rank_delta": 24.0
+            },
+            {
+                "name": "Chypool",
+                "heroes": [
+                    "Black Panther"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": false,
+                "rank_delta": 23.0
+            },
+            {
+                "name": "KnuckleSpawn",
+                "heroes": [
+                    "Luna Snow",
+                    "Invisible Woman"
+                ],
+                "is_mvp": false,
+                "is_svp": false,
+                "is_same_team": false,
+                "rank_delta": 17.0
+            }
+        ]
+    },
     "7fcdf8129a953d41a721d6efc9607d1ba312b2c655f67592ef538e52a2b59bc9": {
         "match_id": "7fcdf8129a953d41a721d6efc9607d1ba312b2c655f67592ef538e52a2b59bc9",
         "match_timestamp": "2025-05-21T04:08:02+00:00",
