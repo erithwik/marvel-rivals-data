@@ -43,13 +43,13 @@ MAP_NAME_TO_MAP_TYPE = {
     "Hall Of Djalia": "Convergence"
 }
 
-AVERAGE_HERO_PERFORMANCE_TEXT = "This next chart shows the average (per game) elo plus/minus for each hero you've played in competitive play."
+AVERAGE_HERO_PERFORMANCE_TEXT = "This next chart shows the average (per game) elo plus/minus for each hero you've played in competitive play. Only heroes played in at least 5 games are included."
 AVERAGE_MATCHUP_SAME_TEAM_PERFORMANCE_TEXT = "This next chart shows the average (per game) elo plus/minus based on what heroes played with you. For example, when you play {player_hero}, if your team has a {teammate_hero}, you perform relatively well."
 AVERAGE_MATCHUP_OPPONENT_PERFORMANCE_TEXT = "This next chart shows the average (per game) elo plus/minus based on what heroes played against you. For example, when you play {player_hero}, if the opposing team has a {opponent_hero}, you perform relatively poorly."
 AVERAGE_MAP_PERFORMANCE_TEXT = "This next chart shows the average (per game) elo plus/minus for each map you've played in competitive play. For example, if you play {player_hero} on {map_name}, you perform relatively well."
 AVERAGE_MAP_TYPE_PERFORMANCE_TEXT = "This next chart shows the average (per game) elo plus/minus for each map type you've played in competitive play. For example, if you play {player_hero} on {map_type}, you perform relatively well."
 
-TOTAL_HERO_PERFORMANCE_TEXT = "This next chart shows the total elo plus/minus of each hero you've played in competitive play."
+TOTAL_HERO_PERFORMANCE_TEXT = "This next chart shows the total elo plus/minus of each hero you've played in competitive play. Only heroes played in at least 5 games are included."
 TOTAL_MATCHUP_SAME_TEAM_PERFORMANCE_TEXT = "This next chart shows the total elo plus/minus based on what heroes played with you. For example, when you play {player_hero}, if your team has a {teammate_hero}, you perform relatively well."
 TOTAL_MATCHUP_OPPONENT_PERFORMANCE_TEXT = "This next chart shows the total elo plus/minus based on what heroes played against you. For example, when you play {player_hero}, if the opposing team has a {opponent_hero}, you perform relatively poorly."
 TOTAL_MAP_PERFORMANCE_TEXT = "This next chart shows the total elo plus/minus for each map you've played in competitive play. For example, if you play {player_hero} on {map_name}, you perform relatively well."
@@ -104,13 +104,16 @@ def filter_matches(matches: dict, only_friend_games: bool, player_ign: str):
     }
 
 def get_overall_plus_minus(filtered_matches: dict, player_ign: str):
-    hero_stats = defaultdict(int)
+    hero_stats = defaultdict(lambda: {"total_plus_minus": 0, "num_games": 0})
     for _, match_data in filtered_matches.items():
         for player_data in match_data.get("match_details", []):
             if player_data.get("name") == player_ign:
                 for hero in player_data.get("heroes", []):
-                    hero_stats[hero] += player_data.get("rank_delta", 0)
-    return dict(sorted(hero_stats.items(), key=lambda item: item[1], reverse=True))
+                    hero_stats[hero]["total_plus_minus"] += player_data.get("rank_delta", 0)
+                    hero_stats[hero]["num_games"] += 1
+    # Only include heroes played more than 5 times
+    filtered_hero_stats = {hero: stats["total_plus_minus"] for hero, stats in hero_stats.items() if stats["num_games"] >= 5}
+    return dict(sorted(filtered_hero_stats.items(), key=lambda item: item[1], reverse=True))
 
 def get_average_plus_minus(filtered_matches: dict, player_ign: str):
     hero_stats = defaultdict(lambda: {"total_plus_minus": 0, "num_games": 0})
@@ -122,7 +125,7 @@ def get_average_plus_minus(filtered_matches: dict, player_ign: str):
                     hero_stats[hero]["num_games"] += 1
     results = {}
     for hero, stats in hero_stats.items():
-        if stats["num_games"] > 0:
+        if stats["num_games"] >= 5:
             results[hero] = stats["total_plus_minus"] / stats["num_games"]
     return dict(sorted(results.items(), key=lambda item: item[1], reverse=True))
 
