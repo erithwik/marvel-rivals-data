@@ -55,6 +55,9 @@ TOTAL_MATCHUP_OPPONENT_PERFORMANCE_TEXT = "This next chart shows the total elo p
 TOTAL_MAP_PERFORMANCE_TEXT = "This next chart shows the total elo plus/minus for each map you've played in competitive play. For example, if you play {player_hero} on {map_name}, you perform relatively well."
 TOTAL_MAP_TYPE_PERFORMANCE_TEXT = "This next chart shows the total elo plus/minus for each map type you've played in competitive play. For example, if you play {player_hero} on {map_type}, you perform relatively well."
 
+AVERAGE_PERFORMANCE_BY_DAY_TEXT = "This next chart shows your average (per game) elo plus/minus for each day of the week."
+TOTAL_PERFORMANCE_BY_DAY_TEXT = "This next chart shows your total elo plus/minus for each day of the week."
+
 @st.cache_data # Cache data loading
 def load_all_player_data():
     all_data = {}
@@ -332,6 +335,79 @@ def create_map_type_performance_chart(map_data: dict, map_games: dict, player_ig
     fig.update_yaxes(title_text=y_axis_title)
     
     return fig
+
+def get_performance_by_day_of_week(filtered_matches: dict, player_ign: str):
+    """Calculates total and average ELO +/- per day of the week."""
+    day_stats = defaultdict(lambda: {"total_plus_minus": 0, "num_games": 0})
+    days_order = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+
+    for _, match_data in filtered_matches.items():
+        match_timestamp_str = match_data.get("match_timestamp")
+        if not match_timestamp_str:
+            continue
+
+        pst_time_obj = convert_datetime(match_timestamp_str)
+        if not pst_time_obj:
+            continue
+
+        day_name = pst_time_obj.strftime('%A')
+
+        for p_data in match_data.get("match_details", []):
+            if p_data.get("name") == player_ign:
+                day_stats[day_name]["total_plus_minus"] += p_data.get("rank_delta", 0)
+                day_stats[day_name]["num_games"] += 1
+                # Since we are looking at overall player performance per day,
+                # we don't need to iterate through heroes here and can break
+                # after finding the player.
+                break 
+                
+    total_performance = {day: day_stats[day]["total_plus_minus"] for day in days_order if day in day_stats}
+    average_performance = {
+        day: day_stats[day]["total_plus_minus"] / day_stats[day]["num_games"]
+        for day in days_order
+        if day in day_stats and day_stats[day]["num_games"] > 0
+    }
+    
+    # Ensure all days are present in the output, even if with 0 value, and maintain order
+    ordered_total_performance = {day: total_performance.get(day, 0) for day in days_order}
+    ordered_average_performance = {day: average_performance.get(day, 0.0) for day in days_order}
+
+    return ordered_total_performance, ordered_average_performance
+
+def create_performance_by_day_chart(performance_data: dict, player_ign: str, is_average: bool):
+    """Generates a Plotly bar chart for performance by day of the week."""
+    if not performance_data or all(value == 0 for value in performance_data.values()): # Check if all values are zero
+        return None
+
+    days = list(performance_data.keys())
+    values = list(performance_data.values())
+
+    y_axis_title = "Average Rank Delta per Game" if is_average else "Total Cumulative Rank Delta"
+    title_suffix = "Average (+/- per Game)" if is_average else "Total (Cumulative +/-)"
+    chart_title = f"Performance by Day of Week for {player_ign} - {title_suffix}"
+
+    colors = ['blue' if delta >= 0 else 'red' for delta in values]
+
+    fig = go.Figure()
+    fig.add_trace(
+        go.Bar(
+            x=days,
+            y=values,
+            name='Performance',
+            marker_color=colors
+        )
+    )
+
+    fig.update_layout(
+        title_text=chart_title,
+        showlegend=False,
+        height=500
+    )
+    fig.update_xaxes(title_text="Day of the Week", tickangle=45, tickfont=dict(size=10))
+    fig.update_yaxes(title_text=y_axis_title)
+
+    return fig
+
 # --- Plotting Helper Functions ---
 
 def get_globally_latest_update_time(all_player_data_dict: dict) -> str:
@@ -540,6 +616,7 @@ if selected_player_ign and selected_player_ign in all_player_data:
         # Calculate data needed for both tabs
         overall_pm = get_overall_plus_minus(filtered_player_matches, selected_player_ign)
         avg_pm = get_average_plus_minus(filtered_player_matches, selected_player_ign)
+        total_perf_by_day, avg_perf_by_day = get_performance_by_day_of_week(filtered_player_matches, selected_player_ign)
 
         with avg_tab:
             st.subheader("Average Hero Performance (+/- per Game)")
@@ -638,6 +715,15 @@ if selected_player_ign and selected_player_ign in all_player_data:
                          st.info(f"No map performance data available for {char_to_analyze} with the selected filters.")
 
                      st.markdown("---")
+
+            st.markdown("***")
+            st.subheader("Average Performance by Day of Week")
+            st.text(AVERAGE_PERFORMANCE_BY_DAY_TEXT)
+            fig_avg_perf_by_day = create_performance_by_day_chart(avg_perf_by_day, player_readable_name, is_average=True)
+            if fig_avg_perf_by_day:
+                st.plotly_chart(fig_avg_perf_by_day, use_container_width=True)
+            else:
+                st.info("No average performance data by day of week available for the selected filters.")
 
         with total_tab:
             st.subheader("Total Hero Performance (Cumulative +/-)")
@@ -742,6 +828,15 @@ if selected_player_ign and selected_player_ign in all_player_data:
 
                      st.markdown("---")
             # ----> END ADDED TOTAL MATCHUP SECTION <----
+            
+            st.markdown("***")
+            st.subheader("Total Performance by Day of Week")
+            st.text(TOTAL_PERFORMANCE_BY_DAY_TEXT)
+            fig_total_perf_by_day = create_performance_by_day_chart(total_perf_by_day, player_readable_name, is_average=False)
+            if fig_total_perf_by_day:
+                st.plotly_chart(fig_total_perf_by_day, use_container_width=True)
+            else:
+                st.info("No total performance data by day of week available for the selected filters.")
 
 else:
     st.info("Select a player from the sidebar to view their stats.")
