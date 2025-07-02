@@ -12,10 +12,8 @@ import os
 DATA_DIR = "data"
 IN_GAME_NAMES = {
     "glacial_spark": "glacial_spark",
-    "tenisstar2000": "Tenisstar2000",
-    "massive_bao": "massive bao",
-    "liquidussnake1": "LiquidusSnake1",
-    "necros_cnf": "necros_cnf"
+    "lunatoemuncher": "LunaToeMuncher",
+    "liquidussnake1": "LiquidusSnake1"
 }
 FILE_NAMES = {ign: os.path.join(DATA_DIR, f"{handle}.json") for handle, ign in IN_GAME_NAMES.items()}
 
@@ -24,11 +22,8 @@ FRIENDS = set(IN_GAME_NAMES.values())
 
 # Relevant characters (adjust as needed)
 RELEVANT_CHARACTERS_MAP = {
-    "glacial_spark": ["Emma Frost", "Doctor Strange", "Mister Fantastic"],
-    "massive bao": ["Invisible Woman", "Iron Fist", "The Thing", "Rocket Raccoon"],
-    "Tenisstar2000": ["Cloak & Dagger", "Scarlet Witch", "Peni Parker", "Rocket Raccoon", "Bruce Banner"],
-    "LiquidusSnake1": ["Loki", "Magneto", "Iron Man", "Captain America", "Rocket Raccoon"],
-    "necros_cnf": ["Iron Fist", "Cloak & Dagger"]
+    "glacial_spark": ["Rocket Raccoon", "Doctor Strange", "Mister Fantastic", "Namor"],
+    "LunaToeMuncher": ["Cloak & Dagger", "Scarlet Witch", "Peni Parker", "Mister Fantastic", "Squirrel Girl"]
 }
 
 MAP_NAME_TO_MAP_TYPE = {
@@ -40,7 +35,8 @@ MAP_NAME_TO_MAP_TYPE = {
     "Symbiotic Surface": "Convergence",
     "Hell's Heaven": "Domination",
     "Midtown": "Convoy",
-    "Hall Of Djalia": "Convergence"
+    "Hall Of Djalia": "Convergence",
+    "Arakko": "Convoy"
 }
 
 AVERAGE_HERO_PERFORMANCE_TEXT = "This next chart shows the average (per game) elo plus/minus for each hero you've played in competitive play. Only heroes played in at least 5 games are included."
